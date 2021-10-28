@@ -1,0 +1,7 @@
+# defalut
+.idea
+*.iml
+out
+gen
+
+data/*/**

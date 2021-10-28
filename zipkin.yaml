@@ -1,0 +1,14 @@
+version: '3'
+services:
+  zipkin:
+    image: registry.tiamaes.com:5000/openzipkin/zipkin
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_HOST=127.0.0.1
+      - MYSQL_TCP_PORT=13306
+      - MYSQL_USER=root
+      - MYSQL_PASS=root
+      - MYSQL_DB=zipkin
+    ports:
+      - 9411:9411

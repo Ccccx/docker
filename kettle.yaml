@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kettle:
+    image: registry.cn-qingdao.aliyuncs.com/dataease/kettle:8.3-v1.1
+    container_name: kettle
+    volumes:
+      - ./data/kettle/conf/:/opt/dataease/conf
+      - ./data/kettle/data/:/opt/dataease/data/kettle
+

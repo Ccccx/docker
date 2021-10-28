@@ -1,0 +1,12 @@
+version: '3'
+services:
+  kettle:
+    image: grafana/grafana:6.5.0
+    container_name: grafana
+    environment:
+      - GF_PATHS_PLUGINS=/var/lib/grafana/plugins
+    volumes:
+      - ./conf/grafana/plugins:/var/lib/grafana/plugins
+      - ./data/grafana:/var/lib/grafana
+    ports:
+      - 3000:3000
