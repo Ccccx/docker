@@ -1,8 +1,13 @@
 version: '3'
 services:
-  kettle:
+  # 默认账户密码 admin/admin
+  grafana:
     image: grafana/grafana:6.5.0
     container_name: grafana
+    logging:
+      driver: “json-file”
+      options:
+        max-size: “500m”
     environment:
       - GF_PATHS_PLUGINS=/var/lib/grafana/plugins
     volumes:

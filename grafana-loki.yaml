@@ -1,6 +1,7 @@
 # https://github.com/grafana/loki  grafana + loki 日志收集
 version: "3"
 services:
+  # 数据库
   loki:
     image: grafana/loki:2.3.0
     ports:
@@ -9,6 +10,7 @@ services:
     networks:
       - loki
 
+ # 日志收集
   promtail:
     image: grafana/promtail:2.3.0
     volumes:
@@ -17,6 +19,7 @@ services:
     networks:
       - loki
 
+# 默认账户密码 admin/admin
   grafana:
     image: grafana/grafana:latest
     ports:

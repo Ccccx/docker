@@ -1,0 +1,22 @@
+  #  规则引擎， 启动后查看: http://localhost:8080/business-central
+#USER        PASSWORD    ROLE
+#*********************************************
+#admin       admin       admin,analyst,kiemgmt
+#krisv       krisv       admin,analyst
+#john        john        analyst,Accounting,PM
+#sales-rep   sales-rep   analyst,sales
+#katy        katy        analyst,HR
+#jack        jack        analyst,IT
+version: '3'
+services:
+  doris:
+    image: jboss/drools-workbench-showcase:7.17.0.Final
+    container_name: drools
+    ports:
+    - 8080:8080
+    volumes:
+#      - ./conf/drools/drools-roles.properties:/opt/jboss/wildfly/standalone/configuration/drools-roles.properties
+#      - ./conf/drools/drools-users.properties:/opt/jboss/wildfly/standalone/configuration/drools-users.properties
+#      - ./conf/drools/standalone-full.xml:/opt/jboss/wildfly/standalone/configuration/standalone-full.xml
+      - ./data/drools/logs:/opt/jboss/wildfly/standalone/log
+      - ./data/drools/git:/home

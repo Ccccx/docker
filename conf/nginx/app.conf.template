@@ -1,0 +1,254 @@
+server {
+    listen   10082;
+    server_name  localhost;
+    charset utf-8,gbk;
+    client_max_body_size 100m; #最大文件上传大小
+    root    /data/ftp/fuser/;
+
+    #location / {
+       #try_files $uri $uri/ /index.html;
+    #}
+}
+
+server {
+    listen  10952;
+    server_name  localhost;
+    charset utf-8;
+    client_max_body_size 200m; #最大文件上传大小
+    root   /usr/share/nginx/html;
+
+    location / {
+       root   /opt/resources/taxi_html/dist/;
+       index index.html;
+    }
+
+
+    location /ipTalk_html/ {
+       try_files $uri $uri/ /ipTalk_html/index.html;
+    }
+
+
+    location /taxi_app/ {
+       try_files $uri $uri/ /taxi_app/index.html;
+    }
+
+    location /taxi_app_old/ {
+       try_files $uri $uri/ /taxi_app_old/index.html;
+    }
+
+
+    location /taxi_html/ {
+       try_files $uri $uri/ /taxi_html/index.html;
+    }
+
+    location /screen_picture/ {
+       try_files $uri $uri/ /screen_picture/;
+    }
+
+
+    location /ntaxi_html/ {
+       try_files $uri $uri/ /ntaxi_html/index.html;
+    }
+
+    location /call_html/ {
+       try_files $uri $uri/ /call_html/index.html;
+    }
+
+
+    location /evaluate_html/ {
+       try_files $uri $uri/ /evaluate_html/index.html;
+    }
+
+
+    location /screen_html/ {
+       try_files $uri $uri/ /screen_html/index.html;
+    }
+
+
+    location /copy_html/ {
+       try_files $uri $uri/ /copy_html/index.html;
+    }
+
+    location /taxi-gateway/dataweb/ {
+       proxy_pass http://192.168.237.110:10001/dataweb/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+    location /taxi-gateway/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+    location /taxi-parent/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /call-gateway/ {
+       proxy_pass http://192.168.237.111:10221/admin/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+  location /call-gateway/admin/ {
+       proxy_pass http://192.168.237.111:10221/admin/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+    location /call-gateway/basic/ {
+       proxy_pass http://192.168.237.111:10221/admin/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+
+    location /call-gateway/admin/basic/ {
+       proxy_pass http://192.168.237.111:10221/admin/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+
+    location /call-gateway/authority/ {
+       proxy_pass http://192.168.237.111:10221/authority/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+    location /call-gateway/admin/authority/ {
+       proxy_pass http://192.168.237.111:10221/authority/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+
+    location /ntaxi-gateway/net/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+
+    location /ntaxi-gateway/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+
+    location /taxi-websocket/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection 'upgrade';
+       #proxy_buffering off;
+    }
+
+    location /ntaxi-websocket/ {
+       proxy_pass http://192.168.237.110:10001/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection 'upgrade';
+       #proxy_buffering off;
+    }
+
+
+    location /photoURL/ {
+       proxy_pass http://192.168.229.62:10082/;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       #proxy_buffering off;
+    }
+}
+
+server {
+    listen  10000;
+    server_name  city;
+    charset utf-8;
+    client_max_body_size 30m; #最大文件上传大小
+    root   /opt/resources/call-city-gateway/dist/;
+
+    location / {
+        index  /index.html;
+        root   /opt/resources/call-city-gateway/dist/;
+    }
+
+
+    location /admin {
+       proxy_pass http://192.168.237.111:10221;
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $Remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    }
+
+}
+
+server {
+    listen 10222;
+    server_name gateway;
+    access_log on;
+    error_log on;
+
+
+    location / {
+        proxy_pass http://192.168.237.111:10222/;
+        proxy_redirect default;
+        proxy_set_header Host $host:$server_port;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection Upgrade;
+        proxy_max_temp_file_size 0;
+        client_max_body_size 10m;
+        client_body_buffer_size 128k;
+        proxy_connect_timeout 90;
+        proxy_send_timeout 90;
+        proxy_read_timeout 90;
+        proxy_buffer_size 4k;
+        proxy_buffers 4 32k;
+        proxy_busy_buffers_size 64k;
+        proxy_temp_file_write_size 64k;
+    }
+}

@@ -1,0 +1,11 @@
+version: "3"
+services:
+  promtail:
+    image: grafana/promtail:2.3.0
+    volumes:
+      - ./conf/promtail:/mnt/config
+      -  /home/tmkj/boot2docker/m1-demo/logs:/var/m1-demo/
+      -  /home/tmkj/boot2docker/m1-gateway/logs:/var/m1-gateway/
+      -  /home/tmkj/boot2docker/m1-report/logs:/var/m1-report/
+      - /home/tmkj/boot2docker/m1-flowable2/logs:/var/m1-flowable2/
+    command: -config.file=/etc/promtail/config.yml

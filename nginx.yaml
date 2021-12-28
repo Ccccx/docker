@@ -3,5 +3,11 @@ services:
   nginx:
     image: nginx
     container_name: nginx
+    volumes:
+      - ./conf/nginx/templates:/etc/nginx/templates
+      - ./conf/nginx/ssl/52play.cloud.key:/etc/nginx/52play.cloud.key
+      - ./conf/nginx/ssl/52play.cloud_bundle.crt:/etc/nginx/52play.cloud_bundle.crt
+      - ./data/nginx/html:/usr/share/nginx/html:ro
     ports:
-      - 20080:80
+      - 80:80
+      - 443:443

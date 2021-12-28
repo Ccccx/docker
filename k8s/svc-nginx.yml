@@ -1,0 +1,22 @@
+# https://time.geekbang.org/column/article/41017  有状态的应用
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "nginx"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.9.1
+          ports:
+            - containerPort: 80
+              name: web

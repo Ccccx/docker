@@ -4,6 +4,7 @@ services:
     image: registry.tiamaes.com:5000/openzipkin/zipkin
     container_name: zipkin
     environment:
+      - JAVA_OPTS=-Xms1G -Xmx2G -Dlogging.level.zipkin2=DEBUG
       - STORAGE_TYPE=mysql
       - MYSQL_HOST=127.0.0.1
       - MYSQL_TCP_PORT=13306

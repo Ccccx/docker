@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          ports:
+            - containerPort: 23306
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: mysql-vol
+      volumes:
+        - name: mysql-vol
+          # 创建一个临时目录
+          emptyDir: { }

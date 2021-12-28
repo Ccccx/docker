@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  # 过滤规则
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 0
+  template:
+    metadata:
+      # 标识当前POD
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 20080
+        volumeMounts: 
+        - mountPath: "/usr/share/nginx/html" 
+          name: nginx-vol 
+      volumes: 
+      - name: nginx-vol 
+        # 创建一个临时目录
+        emptyDir: {}

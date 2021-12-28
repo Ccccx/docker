@@ -1,0 +1,39 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://192.168.231.39:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: m1-demo
+    static_configs:
+      - targets:
+          - 192.168.251.35
+        labels:
+          job: m1-demo
+          __path__: /var/m1-demo/*.log
+  - job_name: m1-gateway
+    static_configs:
+      - targets:
+          - 192.168.251.35
+        labels:
+          job: m1-gateway
+          __path__: /var/m1-gateway/*.log
+  - job_name: m1-report
+    static_configs:
+      - targets:
+            - 192.168.251.35
+        labels:
+            job: m1-report
+            __path__: /var/m1-report/*.log
+  - job_name: m1-flowable2
+    static_configs:
+      - targets:
+          - 192.168.251.35
+      labels:
+          job: m1-flowable2
+          __path__: /var/m1-flowable2/*.log
