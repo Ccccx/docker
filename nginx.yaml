@@ -3,6 +3,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx
+    TZ=Asia/Shanghai
     volumes:
       - ./conf/nginx/templates:/etc/nginx/templates
       - ./conf/nginx/ssl/52play.cloud.key:/etc/nginx/52play.cloud.key
@@ -11,3 +12,4 @@ services:
     ports:
       - 80:80
       - 443:443
+    restart: always
